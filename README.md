@@ -10,5 +10,7 @@ Para executar o sistema é necessário que o serviço do MongoDB (Banco de Dados
 Dentro da pasta src execute o seguinte comando:
 
 ```bash
-pip install requirements.txt && flask run
+pip install -r requirements.txt | flask run
 ```
+
+> Em seguida acesse [127.0.0.1:5000](http://127.0.0.1:5000)
