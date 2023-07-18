@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% set mensagens = get_flashed_messages() %}
+<div class="flex justify-around">
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded flex flex-col items-center justify-around">
+        <h2 class="text-xl font-bold text-center">Quartos</h2>
+        <table>
+            <tr class="border border-solid border-black m-1">
+                <th class="border border-solid border-black m-1 p-1 text-center">Número do quarto</th>
+                <th class="border border-solid border-black m-1 p-1 text-center">Tamanho</th>
+                <th class="border border-solid border-black m-1 p-1 text-center">Preço da diária</th>
+            </tr>
+            {% for quarto in quartos %}
+                <tr class="border border-solid border-black m-1">
+                    <td class="border border-solid border-black m-1 p-1 text-center">{{ quarto["numero_quarto"] }}</td>
+                    <td class="border border-solid border-black m-1 p-1 text-center">{{ quarto["tamanho_quarto"] }} m²</td>
+                    <td class="border border-solid border-black m-1 p-1 text-center">R$ {{ quarto["diaria_preco"] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded">
+        <h2 class="text-xl font-bold text-center">Adicionar quarto</h2>
+        <form action="/quartos/add" method="post" class="flex flex-col items-center">
+            <div class="m-1">
+                <label for="numero_quarto">Número do quarto:</label>
+                <input type="number" name="numero_quarto" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+
+            <div class="m-1">
+                <label for="tamanho_quarto">Tamanho do quarto (m²):</label>
+                <input type="number" name="tamanho_quarto" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+
+            <div class="m-1">
+                <label for="diaria_preco">Preço da diária(R$):</label>
+                <input type="number" name="diaria_preco" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+
+            <button type="submit" class="bg-gray-700 hover:bg-gray-600 rounded m-1 p-1 text-white">Adicionar quarto</button>
+        </form>
+    </div>
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded">
+        <h2 class="text-xl font-bold text-center">Remover quarto</h2>
+        <form action="/quartos/delete" method="post" class="flex flex-col items-center">
+            <div class="m-1">
+                <label for="numero_quarto">Número do quarto: </label>
+                <input type="number" name="numero_quarto" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+
+            <button type="submit" class="bg-gray-700 hover:bg-gray-600 rounded m-1 p-1 text-white">Remover quarto</button>
+        </form>
+    </div>
+</div>
+<div class="flex justify-center">
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <p class="text-center text-red-600 font-bold">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

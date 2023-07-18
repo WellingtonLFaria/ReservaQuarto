@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% set mensagens = get_flashed_messages() %}
+<div class="flex justify-around">
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded flex flex-col items-center justify-around">
+        <h2 class="text-xl font-bold text-center">Quartos Reservados</h2>
+        <table>
+            <tr class="border border-solid border-black m-1">
+                <th class="border border-solid border-black m-1 p-1 text-center">Número do quarto</th>
+                <th class="border border-solid border-black m-1 p-1 text-center">Vencimento da reserva</th>
+            </tr>
+            {% for reserva in reservas %}
+                <tr class="border border-solid border-black m-1">
+                    <td class="border border-solid border-black m-1 p-1 text-center">{{ reserva['numero_quarto'] }}</td>
+                    <td class="border border-solid border-black m-1 p-1 text-center">{{ reserva['data_vencimento']['dia'] }}/{{ reserva['data_vencimento']['mes'] }}/{{ reserva['data_vencimento']['ano'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded flex flex-col items-center justify-around">
+        <h2>Quartos disponíveis</h2>
+        <table>
+            <tr class="border border-solid border-black m-1 p-1">
+                <th class="border border-solid border-black m-1 p-1 text-center">Número do quarto</th>
+            </tr>
+            {% for disponivel in disponiveis %}
+            <tr class="border border-solid border-black m-1 p-1">
+                <td class="border border-solid border-black m-1 p-1 text-center">{{ disponivel }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="w-1/3 bg-gray-400 p-2 m-1 rounded flex flex-col items-center justify-around">
+        <h2 class="text-xl font-bold text-center">Reservar Quarto</h2>
+        <form action="/reservas/add" method="post" class="flex flex-col items-center">
+            <div class="m-1">
+                <label for="numero_quarto">Número do quarto:</label>
+                <input type="number" name="numero_quarto" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+            <div class="m-1">
+                <label for="dias">Número de dias:</label>
+                <input type="number" name="dias" class="bg-gray-400 border-gray-800 border-b-2 border-solid focus:border-blue-800 outline-none">
+            </div>
+            <button type="submit" class="bg-gray-700 hover:bg-gray-600 rounded m-1 p-1 text-white">Realizar reserva</button>
+        </form>
+    </div>
+</div>
+<div class="flex justify-center">
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <p class="text-center text-red-600 font-bold">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

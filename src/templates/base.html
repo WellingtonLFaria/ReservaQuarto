@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL - {{ pag }}</title>
+    <link rel="stylesheet" href="../static/css/output.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="bg-black flex justify-around p-2">
+        <a href="/quartos" class="text-white font-bold">QUARTOS</a>
+        <a href="/reservas" class="text-white font-bold">RESERVAS</a>
+    </div>
+    <h1 class="text-center text-2xl font-bold mt-5">{{ pag }}</h1>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
